@@ -1,13 +1,10 @@
-<template lang="html">
-  <div id="app">
-    <topbar></topbar>
-
-    <main>
-      <transition :name="transitionName" mode="out-in" appear>
-        <keep-alive><router-view></router-view></keep-alive>
-      </transition>
-    </main>
-  </div>
+<template lang="pug">
+  div(id='app')
+    topbar
+    main
+      transition(:name='transitionName' mode='out-in' appear)
+        keep-alive
+          router-view
 </template>
 
 <script>
@@ -17,7 +14,7 @@
     name: 'space-snake',
     computed: {
       transitionName () {
-        return this.$router.path === '/'
+        return this.$route.path === '/'
           ? 'slide-right' : 'slide-left'
       }
     },
