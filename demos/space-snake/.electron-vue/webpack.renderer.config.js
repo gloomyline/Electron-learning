@@ -65,6 +65,10 @@ let rendererConfig = {
         test: /\.html$/,
         use: 'vue-html-loader'
       },
+			{
+				test: /\.pug$/,
+				use: 'pug-loader'
+			},
       {
         test: /\.js$/,
         use: 'babel-loader',
