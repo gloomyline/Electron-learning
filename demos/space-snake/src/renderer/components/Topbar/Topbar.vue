@@ -1,11 +1,11 @@
 <template lang="pug">
-  div(id='topbar' class='topbar')
+  div(id='topbar' class='shadow')
     div(class='row')
       div(class='column')
         div(class='logo')
           img(src='./assets/icon.png')
       div(class='column align-right')
-        router-link(to='/' exact) 开始游戏
+        router-link(to='/' exact) 游戏
         router-link(to='/leaderboard') 排行榜
 </template>
 
