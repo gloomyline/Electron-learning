@@ -1,0 +1,13 @@
+.message,
+.red-m,
+.blue-m {
+  width: 32px;
+  height: 24px;
+  font-size: 18px;
+}
+.red-m {
+  color: #f00;
+}
+.blue-m {
+  color: #00f;
+}
