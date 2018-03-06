@@ -66,6 +66,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Game from './Game.js'
 
 export default {
   name: 'game',
@@ -84,7 +85,7 @@ export default {
   },
   created () {
     window.addEventListener('keydown', e => {
-      this.buttonPressed(e.keycode)
+      this.buttonPressed(e.keyCode)
     })
   },
   computed: {
@@ -95,13 +96,27 @@ export default {
   },
   methods: {
     startGame () {
-      console.log('Game Started!')
+      this.removePreviousCells()
+
+      this.game = new Game(24, 24, 24, this.difficulty)
+
+      this.gameStarted = true
+      this.isPlaying = true
+      this.gamePaused = false
+
+      this.$store.dispatch('TOGGLE_GAME', {
+        finished: false,
+        score: 0
+      })
+      this.$store.dispatch('WIN_GAME', false)
     },
     pauseGame () {
-      console.log('Game Paused!')
+      this.isPlaying = this.game.finishLoop()
+      this.gamePaused = true
     },
     resumeGame () {
-      console.log('Game resumed!')
+      this.isPlaying = this.game.startLoop()
+      this.gamePaused = false
     },
     buttonPressed (key) {
       // Control snake if game started
@@ -140,12 +155,11 @@ export default {
         }
       }
     }
-  },
-  components: {}
+  }
 }
 </script>
 
-<style lang="stylus" ref="stylesheet/stylus" scoped>
+<style lang="stylus" ref="stylesheet/stylus">
   .game
     position: relative
     .greeting
@@ -170,11 +184,28 @@ export default {
       .back-cell
         /* need nested selectors here */
         @extend .game #stage .cell
-  
+    .finished-game-popup
+      position: absolute
+      top: 230px
+      left: 298px
+      margin: 0 auto
+      padding: 20px
+      background-color: #fff
+      transform: translate3d(-50%, 0, 0)
+      z-index: 2
+      h4, p
+        margin-bottom: 0
+        span
+          mixin-gradient-text($gradient-secondary)
+          font-weight: 700
+          font-size: 20px
   .column.sidebar-wrapper
     padding-left: 20px
     .sidebar
       height: 100%
+      button:active
+        transform: scale($scale-coef)
+        background: $gradient-secondary
       h2
         margin: 40px 0 10px
         &:first-child

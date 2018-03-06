@@ -2,7 +2,7 @@
 * @Author: AlanWang
 * @Date:   2018-03-06 09:39:56
 * @Last Modified by:   AlanWang
-* @Last Modified time: 2018-03-06 09:56:01
+* @Last Modified time: 2018-03-06 15:23:45
 */
 import storage from '@/store/storage'
 import * as types from '@/store/mutation-types'
