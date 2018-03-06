@@ -39,4 +39,6 @@ export default {
         display: inline-block
         margin-left: 20px
         color: $color-dark
+        &:active, &.router-link-active
+          mixin-gradient-text($gradient-secondary)
 </style>
